@@ -19,6 +19,7 @@ public class ParseSpeed {
     public static class BenchmarkState {
         
         byte[] json;
+        ObjectMapper objectMapper = new ObjectMapper();
 
         public BenchmarkState() {
             String location = "jsonexamples/twitter.json";
@@ -36,8 +37,7 @@ public class ParseSpeed {
 
     @Benchmark
     public JsonNode parse(BenchmarkState s) throws IOException {
-        ObjectMapper objectMapper = new ObjectMapper();
-        return objectMapper.readTree(s.json);
+        return s.objectMapper.readTree(s.json);
     }
 
 }
